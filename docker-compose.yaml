@@ -1,24 +1,19 @@
 services:
     web:
-        build:
-            context: .
-            dockerfile: Dockerfile.web
+        image: drzlobjul/22-50-web
+        deploy:
+            replicas: 3
         ports:
             - 8080:80
         volumes:
             - "/home/vagrant/test2-17.02/web:/var/www/html:ro"
         networks:
             - app-network
-        depends_on:
-            - db
     db:
-        build:
-            context: .
-            dockerfile: Dockerfile.db
+        image: drzlobjul/22-50-db
         networks:
             - app-network
         environment:
             MYSQL_ROOT_PASSWORD: "12345"
 networks:
     app-network:
-
